@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  _raw: eyJzZWNyZXRzIjpbeyJjcmVhdGVkX2F0IjoiMjAyNC0wNC0wMVQyMToxMDoyMC44MDZaIiwiY3JlYXRlZF9ieSI6eyJlbWFpbCI6ImVyY2FuLnV6dW5kYWxAa29uc2FsdC5jb20udHIiLCJuYW1lIjoiZXJjYW4udXp1bmRhbEBrb25zYWx0LmNvbS50ciIsInR5cGUiOiJUWVBFX1VTRVIifSwibGF0ZXN0X3ZlcnNpb24iOiIyIiwibmFtZSI6ImRiY3JlZGVudGlhbCIsInZlcnNpb24iOnsiY3JlYXRlZF9hdCI6IjIwMjQtMDQtMDJUMTg6Mzk6MDIuNDgwWiIsImNyZWF0ZWRfYnkiOnsiZW1haWwiOiJlcmNhbi51enVuZGFsQGtvbnNhbHQuY29tLnRyIiwibmFtZSI6ImVyY2FuLnV6dW5kYWxAa29uc2FsdC5jb20udHIiLCJ0eXBlIjoiVFlQRV9VU0VSIn0sInR5cGUiOiJrdiIsInZhbHVlIjoiS29uMTIzXzUhISIsInZlcnNpb24iOiIyIn19XX0=
+  dbcredential: S29uMTIzXzUhIQ==
+kind: Secret
+metadata:
+  creationTimestamp: "2024-04-02T18:34:18Z"
+  labels:
+    app.kubernetes.io/component: secret-sync
+    app.kubernetes.io/managed-by: hashicorp-vso
+    app.kubernetes.io/name: vault-secrets-operator
+    hvs: "true"
+    secrets.hashicorp.com/vso-ownerRefUID: 634ed4e0-15ef-4bb0-8fb0-f45ed1bf368d
+  name: mywebapp
+  namespace: mywebapp
+  ownerReferences:
+  - apiVersion: secrets.hashicorp.com/v1beta1
+    kind: HCPVaultSecretsApp
+    name: mywebapp
+    uid: 634ed4e0-15ef-4bb0-8fb0-f45ed1bf368d
+  resourceVersion: "26327770"
+  uid: 43ce3ff4-3132-4c86-8a32-8e3e223a0111
+type: Opaque

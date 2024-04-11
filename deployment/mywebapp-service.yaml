@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-03-28T15:12:11Z"
+  name: mywebapp-service
+  namespace: mywebapp
+  resourceVersion: "14688881"
+  uid: cdbb2a0d-cf2f-43bc-ba48-0013b3c4dd51
+spec:
+  clusterIP: 172.30.128.1
+  clusterIPs:
+  - 172.30.128.1
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: mywebapp
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

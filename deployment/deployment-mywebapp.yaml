@@ -1,0 +1,76 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mywebapp
+  namespace: mywebapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mywebapp
+  template:
+    metadata:
+      labels:
+        app: mywebapp
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: wait-for-db
+          command:
+            - sh
+            - '-c'
+            - >-
+              until nc -zv $DATABASE_HOST $DATABASE_PORT; do echo 'Waiting for
+              database to become available...'; sleep 1; done
+          env:
+            - name: DATABASE_HOST
+              value: tcmbgwfkm.konsalt.info
+            - name: DATABASE_PORT
+              value: '5432'
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: env
+              mountPath: /etc/config
+          terminationMessagePolicy: File
+          image: busybox
+      imagePullSecrets:
+        - name: registrypullsecret
+        - name: registrypullsecret
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      securityContext: {}
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: mywebapp
+          env:
+            - name: DATABASE_HOST
+              value: tcmbgwfkm.konsalt.info
+            - name: DATABASE_PORT
+              value: '5432'
+            - name: DATABASE_NAME
+              value: contacts
+            - name: DATABASE_USER
+              value: mywebapp
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mywebapp
+                  key: dbcredential
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: datavolume
+              mountPath: /data
+          terminationMessagePolicy: File
+          image: 's001elk2.konsalt.info:5555/my-nodejs-app:1.4'
+      volumes:
+        - name: env
+          emptyDir: {}
+        - name: datavolume
+          persistentVolumeClaim:
+            claimName: mywebdata

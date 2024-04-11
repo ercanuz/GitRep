@@ -2,12 +2,14 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_VERSION = '14' // Specify Node.js version
-        DOCKER_IMAGE_NAME = 'my-nodejs-app' // Specify your Docker image name
-        NEXUS_REPO_URL = 's001elk2.konsalt.info:5555' // Specify Nexus repository URL
-        OPENSHIFT_PROJECT = 'mywebapp2' // Specify your OpenShift project
-        IMAGE_TAG = '1.8'
+        NODEJS_VERSION = '14'
+        DOCKER_IMAGE_NAME = 'my-nodejs-app'
+        NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
+        OPENSHIFT_PROJECT = 'mywebapp' 
+        IMAGE_TAG = '1.10'
         OPENSHIFT_API = 'api.ocp4dev.konsalt.info:6443'
+        DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
+        IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
     }
 
     stages {
@@ -23,7 +25,7 @@ pipeline {
             steps {
                 // Build Docker image
                 sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
-                sh "docker tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
+                sh "docker tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
             }
         }
 
@@ -34,10 +36,17 @@ pipeline {
                     sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
                 }
                 // Push Docker image to Nexus repository
-                sh "docker push $NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
+                sh "docker push $IMAGE_NAME"
             }
         }
-
+        stage('Replace Image Name') {
+            steps {
+                script {
+                    // Replace the image name in the deployment YAML file
+                    sh "sed -i 's|image: .*|image: $IMAGE_NAME|g' $DEPLOYMENT_FILE"
+                }
+            }
+        }
         stage('Deploy to OpenShift') {
             steps {
                 // Log in to OpenShift
@@ -46,7 +55,7 @@ pipeline {
                 }
                 // Deploy application to OpenShift
                 sh "oc project $OPENSHIFT_PROJECT"
-                sh "oc apply -f openshift-deployment.yaml"
+                sh "oc apply -f $DEPLOYMENT_FILE"
             }
         }
     }
