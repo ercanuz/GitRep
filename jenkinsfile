@@ -7,6 +7,7 @@ pipeline {
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555' // Specify Nexus repository URL
         OPENSHIFT_PROJECT = 'mywebapp2' // Specify your OpenShift project
         IMAGE_TAG = '1.8'
+        OPENSHIFT_API = 'api.ocp4dev.konsalt.info:6443'
     }
 
     stages {
@@ -41,7 +42,7 @@ pipeline {
             steps {
                 // Log in to OpenShift
                 withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
-                    sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD https://openshift.example.com"
+                    sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API"
                 }
                 // Deploy application to OpenShift
                 sh "oc project $OPENSHIFT_PROJECT"
