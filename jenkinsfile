@@ -21,7 +21,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build Docker image
-                sh "docker build -t $DOCKER_IMAGE_NAME ."
+                sh "docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$IMAGE_TAG"
+                sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
             }
         }
 
@@ -32,7 +33,6 @@ pipeline {
                     sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
                 }
                 // Push Docker image to Nexus repository
-                sh "docker tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$IMAGE_TAG"
                 sh "docker push $DOCKER_IMAGE_NAME:$IMAGE_TAG $NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
             }
         }
