@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'my-nodejs-app:' // Specify your Docker image name
         NEXUS_REPO_URL = 'https://s001elk2.konsalt.info:5555' // Specify Nexus repository URL
         OPENSHIFT_PROJECT = 'mywebapp2' // Specify your OpenShift project
-        IMAGE-TAG = '1.6'
+        IMAGE_TAG = '1.6'
     }
 
     stages {
