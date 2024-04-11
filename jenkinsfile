@@ -4,7 +4,7 @@ pipeline {
     environment {
         NODEJS_VERSION = '14' // Specify Node.js version
         DOCKER_IMAGE_NAME = 'my-nodejs-app' // Specify your Docker image name
-        NEXUS_REPO_URL = 'https://s001elk2.konsalt.info:5555' // Specify Nexus repository URL
+        NEXUS_REPO_URL = 's001elk2.konsalt.info:5555' // Specify Nexus repository URL
         OPENSHIFT_PROJECT = 'mywebapp2' // Specify your OpenShift project
         IMAGE_TAG = '1.8'
     }
