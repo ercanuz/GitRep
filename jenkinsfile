@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NODEJS_VERSION = '14' // Specify Node.js version
-        DOCKER_IMAGE_NAME = 'my-nodejs-app:1.5' // Specify your Docker image name
+        DOCKER_IMAGE_NAME = 'my-nodejs-app:1.6' // Specify your Docker image name
         NEXUS_REPO_URL = 'https://s001elk2.konsalt.info:5555' // Specify Nexus repository URL
         OPENSHIFT_PROJECT = 'mywebapp2' // Specify your OpenShift project
     }
@@ -31,6 +31,7 @@ pipeline {
                     sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
                 }
                 // Push Docker image to Nexus repository
+                sh "docker tag $DOCKER_IMAGE $NEXUS_REPO_URL/$DOCKER_IMAGE_NAME"
                 sh "docker push $DOCKER_IMAGE_NAME $NEXUS_REPO_URL/$DOCKER_IMAGE_NAME"
             }
         }
