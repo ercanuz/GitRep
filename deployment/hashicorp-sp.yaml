@@ -4,9 +4,6 @@ data:
   clientSecret: LVlwYTZNWWNnUlJkXzdhMTY4VVNFZG1paVVKckJ1Q3hHUXJfSEhEYU1ZS1dSV0NncmpmREx0djBJNXhVN3hkaw==
 kind: Secret
 metadata:
-  creationTimestamp: "2024-04-02T18:34:15Z"
   name: hashicorp-sp
   namespace: mywebapp
-  resourceVersion: "18735629"
-  uid: 201964fb-9960-4bde-b8fc-58ecfbfd15db
 type: Opaque

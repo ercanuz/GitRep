@@ -55,7 +55,12 @@ pipeline {
                 }
                 // Deploy application to OpenShift
                 sh "oc project $OPENSHIFT_PROJECT"
+                sh "oc apply -f deployment/registrypullsecret.yaml"
+                sh "oc apply -f deployment/mywebdata.pvc.yaml"
+                sh "oc apply -f deployment/registrypullsecret.yaml"
+                sh "oc apply -f deployment/hashicorp-sp.yaml"
                 sh "oc apply -f $DEPLOYMENT_FILE"
+                sh "oc apply -f deployment/mywebapp-service.yaml"
             }
         }
     }

@@ -1,18 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  annotations:
-    pv.kubernetes.io/bind-completed: "yes"
-    pv.kubernetes.io/bound-by-controller: "yes"
-    volume.beta.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
-    volume.kubernetes.io/storage-provisioner: openshift-storage.cephfs.csi.ceph.com
-  creationTimestamp: "2024-03-29T13:26:36Z"
-  finalizers:
-  - kubernetes.io/pvc-protection
   name: mywebdata
   namespace: mywebapp
-  resourceVersion: "15258526"
-  uid: a85fbaeb-cf22-4f01-bcce-d9067da08e5f
 spec:
   accessModes:
   - ReadWriteMany
@@ -21,10 +11,3 @@ spec:
       storage: 2Gi
   storageClassName: ocs-storagecluster-cephfs
   volumeMode: Filesystem
-  volumeName: pvc-a85fbaeb-cf22-4f01-bcce-d9067da08e5f
-status:
-  accessModes:
-  - ReadWriteMany
-  capacity:
-    storage: 2Gi
-  phase: Bound
