@@ -8,4 +8,4 @@ spec:
     kind: Service
     name: mywebapp-service
   port:
-    targetPort: 3000
+    targetPort: 80
