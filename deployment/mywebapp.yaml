@@ -1,0 +1,13 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: HCPVaultSecretsApp
+metadata:
+  name: mywebapp
+  namespace: mywebapp
+spec:
+  appName: mywebapp
+  destination:
+    create: true
+    labels:
+      hvs: "true"
+    name: mywebapp
+  refreshAfter: 1h
