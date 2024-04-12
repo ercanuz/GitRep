@@ -61,6 +61,7 @@ pipeline {
                 sh "oc apply -f deployment/mywebapp.yaml"
                 sh "oc apply -f $DEPLOYMENT_FILE"
                 sh "oc apply -f deployment/mywebapp-service.yaml"
+                sh "oc apply -f deployment/mywebapp-route.yaml"
             }
         }
     }
