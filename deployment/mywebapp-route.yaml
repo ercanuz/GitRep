@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mywebapp-route
+spec:
+  host: mywebapp.konsalt.info
+  to:
+    kind: Service
+    name: mywebapp-service
+  port:
+    targetPort: 80
