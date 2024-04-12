@@ -3,19 +3,9 @@ kind: Route
 metadata:
   name: mywebapp-route
 spec:
-  host: mywebapp.example.com  # Replace with your desired hostname
+  host: mywebapp.konsalt.info
   to:
     kind: Service
     name: mywebapp-service
   port:
-    targetPort: 443
-  tls:
-    termination: edge  # Use 'edge' for SSL termination
-    certificate: |
-      -----BEGIN CERTIFICATE-----
-      <Your SSL Certificate Here>
-      -----END CERTIFICATE-----
-    key: |
-      -----BEGIN PRIVATE KEY-----
-      <Your SSL Private Key Here>
-      -----END PRIVATE KEY-----
+    targetPort: 3000
