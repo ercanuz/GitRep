@@ -2,7 +2,7 @@ pipeline {
      agent {
         kubernetes {
             label 'ocp4dev'
-            defaultContainer 'jenkins-slave'
+            
         }
      }
     environment {
