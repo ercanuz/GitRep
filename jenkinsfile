@@ -24,7 +24,7 @@ pipeline {
         }
  stage('test') {
             steps {
-                sh "sleep 50000"
+                sh "apt install docker -y"
             }
         }
         
