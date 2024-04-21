@@ -22,7 +22,11 @@ pipeline {
                 checkout scm
             }
         }
-
+ stage('test') {
+            steps {
+                sh "sleep 50000"
+            }
+        }
         
 
         
