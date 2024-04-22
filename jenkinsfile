@@ -20,16 +20,54 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh "sleep 300"
             }
         }
 
         
 
-        
+        stage('Build Docker Image') {
+            steps {
+                // Build Docker image
+                sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
+                sh "docker tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
+            }
+        }
 
-        
-    
+        stage('Push to Nexus') {
+            steps {
+                // Log in to Nexus repository
+                withCredentials([usernamePassword(credentialsId: 'b8a4eefc-c6dd-49ac-b1e3-ae1c1efb5dad', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
+                }
+                // Push Docker image to Nexus repository
+                sh "docker push $IMAGE_NAME"
+            }
+        }
+        stage('Replace Image Name') {
+            steps {
+                script {
+                    // Replace the image name in the deployment YAML file
+                    sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+                }
+            }
+        }
+        stage('Deploy to OpenShift') {
+            steps {
+                // Log in to OpenShift
+                withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
+                    sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
+                }
+                // Deploy application to OpenShift
+                sh "oc project $OPENSHIFT_PROJECT"
+                sh "oc apply -f deployment/registrypullsecret.yaml"
+                sh "oc apply -f deployment/mywebdata.pvc.yaml"
+                sh "oc apply -f deployment/hashicorp-sp.yaml"
+                sh "oc apply -f deployment/mywebapp.yaml"
+                sh "oc apply -f $DEPLOYMENT_FILE"
+                sh "oc apply -f deployment/mywebapp-service.yaml"
+                sh "oc apply -f deployment/mywebapp-route.yaml"
+            }
+        }
     }
 
     post {
