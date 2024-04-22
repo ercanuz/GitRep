@@ -46,8 +46,8 @@ spec:
             steps {
                 container('occlientdockerclient') {
                 // Build Docker image
-                sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
-                sh "docker tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
+                sh "sudo podman build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
+                sh "sudo podman tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
                 }
             }
         }
