@@ -18,20 +18,11 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-      - name: docker-socket
-        mountPath: /var/run/docker.sock
-    securityContext:
-      runAsUser: 0
   - name: occlientdockerclient
     image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
     command:
     - cat
     tty: true
-  volumes:
-    - name: docker-socket
-      hostPath:
-        path: /var/run/docker.sock
 """
         }
     }
