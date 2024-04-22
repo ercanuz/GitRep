@@ -11,8 +11,8 @@ metadata:
     jenkins: ocdockerclient
 spec:
   containers:
-  - name: occlientdockerclient
-    image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
+  - name: mydocker
+    image: 's001elk2.konsalt.info:5555/mydocker:0.1'
     command:
     - cat
     tty: true
@@ -21,6 +21,11 @@ spec:
         mountPath: /var/run/docker.sock
     securityContext:
       runAsUser: 0
+  - name: occlientdockerclient
+    image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
+    command:
+    - cat
+    tty: true
   volumes:
     - name: docker-socket
       hostPath:
@@ -40,18 +45,18 @@ spec:
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                container('occlientdockerclient') {
-                checkout scm
-                }
-            }
-        }
+   // stages {
+     //   stage('Checkout') {
+       //     steps {
+         //       container('occlientdockerclient') {
+           //     checkout scm
+             //   }
+           // }
+        //}
 
 stage('test') {
             steps {
-                container('occlientdockerclient') {
+                container('mydocker') {
                 sh "sleep 300"
                 }
             }
