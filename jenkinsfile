@@ -12,7 +12,9 @@ metadata:
 spec:
   containers:
   - name: mydocker
-    image: 's001elk2.konsalt.info:5555/mydocker:0.1'
+    image: docker:24.0.0-rc.1-dind
+    securityContext:
+      privileged: true
     command:
     - cat
     tty: true
