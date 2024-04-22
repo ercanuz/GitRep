@@ -22,11 +22,7 @@ pipeline {
                 checkout scm
             }
         }
- stage('test') {
-            steps {
-                sh "apt install docker -y"
-            }
-        }
+
         
 
         
