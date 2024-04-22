@@ -11,18 +11,21 @@ metadata:
     jenkins: ocdockerclient
 spec:
   containers:
-  - name: mydocker
-    image: docker:24.0.0-rc.1-dind
-    securityContext:
-      privileged: true
-    command:
-    - cat
-    tty: true
   - name: occlientdockerclient
     image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
     command:
     - cat
     tty: true
+  - name: dind
+    image: docker:18.05-dind
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: dind-storage
+        mountPath: /var/lib/docker
+  volumes:
+    - name: dind-storage
+      emptyDir: {}
 """
         }
     }
@@ -49,7 +52,7 @@ spec:
 
 stage('test') {
             steps {
-                container('mydocker') {
+                container('dind') {
                 sh "sleep 300"
                 }
             }
