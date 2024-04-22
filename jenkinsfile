@@ -34,7 +34,7 @@ spec:
     stages {
         stage('Checkout') {
             steps {
-                container('occlient_dockerclient') {
+                container('occlientdockerclient') {
                 checkout scm
                 }
             }
