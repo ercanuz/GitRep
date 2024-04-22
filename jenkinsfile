@@ -40,14 +40,21 @@ spec:
             }
         }
 
+stage('test') {
+            steps {
+                container('occlientdockerclient') {
+                sh "sleep 300"
+                }
+            }
+        }
         
 
         stage('Build Docker Image') {
             steps {
                 container('occlientdockerclient') {
                 // Build Docker image
-                sh "sudo podman build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
-                sh "sudo podman tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
+                sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
+                sh "docker podman tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
                 }
             }
         }
