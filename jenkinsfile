@@ -45,7 +45,7 @@ spec:
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
     }
 
-   // stages {
+   stages {
      //   stage('Checkout') {
        //     steps {
          //       container('occlientdockerclient') {
