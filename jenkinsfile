@@ -49,15 +49,18 @@ spec:
         }
       }
      }
-
-//stage('test') {
-  //          steps {
-    //            container('dind') {
-      //          sh "sleep 300"
-        //        }
-          //  }
-        //}
-        
+stage('copy certificate') {
+          steps {
+            container('dind') {
+                sh  "mkdir -p /etc/docker/certs.d/s001elk2.konsalt.info:5555"
+                sh  "cp Konsalt-CA.crt /etc/docker/certs.d/s001elk2.konsalt.info:5555"
+                sh  "cd /etc/docker/certs.d/s001elk2.konsalt.info:5555"
+                sh  "mv Konsalt-CA.crt ca.crt"
+                sh  ""    
+                         }
+      }
+     }
+       
 
         stage('Build Docker Image') {
             steps {
