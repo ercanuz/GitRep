@@ -62,6 +62,15 @@ spec:
           ports:
             - containerPort: 3000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3001
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: datavolume
