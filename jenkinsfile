@@ -64,7 +64,7 @@ spec:
                 container('dind') {
                 // Build Docker image
                 sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
-                sh "docker podman tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
+                sh "docker podmanimage tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
                 }
             }
         }
