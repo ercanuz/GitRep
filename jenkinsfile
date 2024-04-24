@@ -17,7 +17,7 @@ spec:
     - cat
     tty: true
   - name: dind
-    image: docker:18.05-dind
+    image: s001elk2.konsalt.info:5555/mydockerdind:1.0
     securityContext:
       privileged: true
     volumeMounts:
