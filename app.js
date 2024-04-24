@@ -33,51 +33,24 @@ function writeLog(message) {
   });
 }
 
-app.get('/login', (req, res) => {
-  res.send('Login page'); // Send a simple response for now
-});
 // Routes
 app.get('/', (req, res) => {
   writeLog('GET request received for /');
   res.send(`
-    <h1>Login</h1>
-    <form action="/login" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username"><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password"><br><br>
-      <input type="submit" value="Login">
+    <form action="/submit" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="surname">Surname:</label>
+      <input type="text" id="surname" name="surname"><br><br>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title"><br><br>
+      <label for="phonenumber">Phone Number:</label>
+      <input type="text" id="phonenumber" name="phonenumber"><br><br>
+      <input type="submit" value="Submit">
     </form>
   `);
 });
 
-// Login route
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Perform authentication here, for example, querying a database
-    // For simplicity, let's assume a hardcoded username and password
-    if (username === 'admin' && password === 'password') {
-      // Redirect authenticated users to the main page
-      res.redirect('/main');
-    } else {
-      // If authentication fails, render the login page again with an error message
-      res.send('<h1>Invalid username or password</h1>');
-    }
-  } catch (err) {
-    console.error('Error during login:', err);
-    res.status(500).send('An error occurred during login.');
-  }
-});
-
-// Main page route
-app.get('/main', (req, res) => {
-  writeLog('GET request received for /main');
-  res.send('<h1>Main Application Page</h1>');
-});
-
-// Form submission route
 app.post('/submit', async (req, res) => {
   const { name, surname, title, phonenumber } = req.body;
 
@@ -97,6 +70,9 @@ app.post('/submit', async (req, res) => {
 });
 
 // Start server
+// test
+//test2
+//
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
