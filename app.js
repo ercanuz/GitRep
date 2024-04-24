@@ -33,6 +33,9 @@ function writeLog(message) {
   });
 }
 
+app.get('/login', (req, res) => {
+  res.send('Login page'); // Send a simple response for now
+});
 // Routes
 app.get('/', (req, res) => {
   writeLog('GET request received for /');
