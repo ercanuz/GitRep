@@ -35,7 +35,7 @@ spec:
         DOCKER_IMAGE_NAME = 'my-nodejs-app'
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
         OPENSHIFT_PROJECT = 'mywebapp' 
-        IMAGE_TAG = '1.17'
+        IMAGE_TAG = '1.18'
         OPENSHIFT_API = 'api.ocp4dev.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
