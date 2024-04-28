@@ -77,6 +77,23 @@ spec:
               mountPath: /data
           terminationMessagePolicy: File
           image: 's001elk2.konsalt.info:5555/my-nodejs-app'
+          - name: elastic-agent
+          image: 's001elk2.konsalt.info:5555/elastic-agent:8.13.2'
+          env:
+            - name: ELASTICSEARCH_HOST
+              value: "http://s001elk1.konsalt.info:9200"
+            - name: ELASTICSEARCH_USERNAME
+              value: "elastic"
+            - name: ELASTICSEARCH_PASSWORD
+              value: "+bB9NIY8j4tUqdhRJjhy"
+          args: [
+            "run",
+            "-e",
+            "-d"
+          ]
+          volumeMounts:
+            - name: datavolume
+              mountPath: /data
       volumes:
         - name: env
           emptyDir: {}
