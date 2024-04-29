@@ -22,7 +22,7 @@ const pool = new Pool({
 // Function to write logs to a file
 function writeLog(message) {
   const logFilePath = '/data/app.log'; // Path to the log file
-  const timestamp = new Date().toISOString(); // Get current timestamp
+  const timestamp = new Date().toISOString().slice(0, 19); // Get current timestamp
   const logMessage = `[${timestamp}] ${message}\n`; // Format log message with timestamp
 
   // Append log message to the log file
