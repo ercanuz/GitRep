@@ -20,10 +20,10 @@ const pool = new Pool({
 });
 
 // Function to write logs to a file
-function writeLog(message) {
+function writeLog(severity, message) {
   const logFilePath = '/data/app.log'; // Path to the log file
   const timestamp = new Date().toISOString().slice(0, 19); // Get current timestamp
-  const logMessage = `[${timestamp}] ${message}\n`; // Format log message with timestamp
+  const logMessage = `[${timestamp}] [${severity}] ${message}\n`; // Format log message with timestamp and severity
 
   // Append log message to the log file
   fs.appendFile(logFilePath, logMessage, (err) => {
@@ -35,7 +35,7 @@ function writeLog(message) {
 
 // Routes
 app.get('/', (req, res) => {
-  writeLog('GET request received for /');
+  writeLog('INFO', 'GET request received for /');
   res.send(`
     <form action="/submit" method="post">
       <label for="name">Name:</label>
@@ -60,19 +60,16 @@ app.post('/submit', async (req, res) => {
     const values = [name, surname, title, phonenumber];
     await client.query(query, values);
     client.release();
-    writeLog('Data successfully inserted into the database.');
+    writeLog('INFO', 'Data successfully inserted into the database.');
     res.send('Data successfully inserted into the database.');
   } catch (err) {
     console.error('Error executing query', err);
-    writeLog('An error occurred while processing the request.');
+    writeLog('ERROR', 'An error occurred while processing the request.');
     res.status(500).send('An error occurred while processing your request.');
   }
 });
 
 // Start server
-// test
-//test2
-//
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
