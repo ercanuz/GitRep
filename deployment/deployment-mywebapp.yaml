@@ -78,14 +78,17 @@ spec:
           terminationMessagePolicy: File
           image: 's001elk2.konsalt.info:5555/my-nodejs-app'
         - name: elastic-agent
-          image: 's001elk2.konsalt.info:5555/elastic-agent:8.13.2'
+          image: 's001elk2.konsalt.info:5555/elastic-agent:1.0'
           env:
-            - name: ELASTICSEARCH_HOST
+            - name: ELASTICSEARCH_HOSTS
               value: "http://s001elk1.konsalt.info:9200"
             - name: ELASTICSEARCH_USERNAME
               value: "elastic"
             - name: ELASTICSEARCH_PASSWORD
-              value: "+bB9NIY8j4tUqdhRJjhy"
+              valueFrom:
+                secretKeyRef:
+                  name: mywebapp
+                  key: elasticpassword
           args: [
             "run",
             "-e"
