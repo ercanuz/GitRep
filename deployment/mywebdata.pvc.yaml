@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  storageClassName: ocs-storagecluster-cephfs
+  storageClassName: lvms-vg1
   volumeMode: Filesystem
