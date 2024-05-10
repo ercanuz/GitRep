@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  clientID: EbvjJqxBkPXoDKUcPQfevopmZqsiU3sTRWJ2akpxeEJrUFhvREtVY1BRZmV2b3BtWnFzaVUzc1Q
+  clientID: RWJ2akpxeEJrUFhvREtVY1BRZmV2b3BtWnFzaVUzc1QK
   clientSecret: Nmx5TUtrQ2lPYmpuamh2TEdxa1NWQlcyT3Mxd2dnRHFvclhFZ1cwU3ZUTnNYTVpyaEtUZGU5cTJXMlBYVC10dg==
 kind: Secret
 metadata:
