@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
-  clientID: EbvjJqxBkPXoDKUcPQfevopmZqsiU3sT
-  clientSecret: 6lyMKkCiObjnjhvLGqkSVBW2Os1wggDqorXEgW0SvTNsXMZrhKTde9q2W2PXT-tv
+  clientID: EbvjJqxBkPXoDKUcPQfevopmZqsiU3sTRWJ2akpxeEJrUFhvREtVY1BRZmV2b3BtWnFzaVUzc1Q
+  clientSecret: Nmx5TUtrQ2lPYmpuamh2TEdxa1NWQlcyT3Mxd2dnRHFvclhFZ1cwU3ZUTnNYTVpyaEtUZGU5cTJXMlBYVC10dg==
 kind: Secret
 metadata:
   name: hashicorp-sp
