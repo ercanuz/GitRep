@@ -1,25 +1,35 @@
 pipeline {
-    
-       agent {
-          kubernetes {
-              label 'ocp4dev' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
-              defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
-              yaml """
-  apiVersion: v1
-  kind: Pod
-  metadata:
-    labels:
-      jenkins: ocdockerclient
-  spec:
-    containers:
-    - name: occlientdockerclient
-      image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
-      command:
-      - cat
-      tty: true
-  """
-          }
-      }
+    agent any
+//     agent {
+//        kubernetes {
+//            label 'ocp4dev' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
+//            defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
+//            yaml """
+//apiVersion: v1
+//kind: Pod
+//metadata:
+//  labels:
+//    jenkins: ocdockerclient
+//spec:
+//  containers:
+//  - name: occlientdockerclient
+//    image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
+//    command:
+//    - cat
+//    tty: true
+//  - name: dind
+//    image: s001elk2.konsalt.info:5555/mydockerdind:1.0
+//    securityContext:
+//      privileged: true
+//    volumeMounts:
+//      - name: dind-storage
+//        mountPath: /var/lib/docker
+//  volumes:
+//    - name: dind-storage
+//      emptyDir: {}
+//"""
+//        }
+//    }
 
     environment {
         NODEJS_VERSION = '14'
@@ -39,15 +49,6 @@ pipeline {
           checkout scm
         
       }
-     }
-
-     stage('Checkout2') {
-          steps {
-            container('occlientdockerclient') {
-          checkout scm
-        
-      }
-     }
      }
 //stage('copy certificate') {
   //        steps {
@@ -88,18 +89,17 @@ pipeline {
         }
         stage('Replace Image Name') {
             steps {
-                 container('occlientdockerclient') {
+                
                 script {
                     // Replace the image name in the deployment YAML file
                     sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
                 }
-                 }
             }
             }
         
         stage('Deploy to OpenShift') {
             steps {
-                 container('occlientdockerclient') {
+                
                 // Log in to OpenShift
                 withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
                     sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
@@ -114,7 +114,6 @@ pipeline {
                 sh "oc apply -f deployment/mywebapp-service.yaml"
                 sh "oc apply -f deployment/mywebapp-route.yaml"
             
-            }
             }
         }
     }
