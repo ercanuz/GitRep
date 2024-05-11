@@ -78,7 +78,7 @@ spec:
           terminationMessagePolicy: File
           image: 's001elk2.konsalt.info:5555/my-nodejs-app'
         - name: elastic-filebeat
-          image: 's001elk2.konsalt.info:5555/filebeat:1.0'
+          image: 's001elk2.konsalt.info:5555/filebeat:1.1'
           env:
             - name: ELASTICSEARCH_HOSTS
               value: "http://s001elk1.konsalt.info:9200"
