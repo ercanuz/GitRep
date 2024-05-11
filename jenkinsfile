@@ -50,6 +50,15 @@ pipeline {
         
       }
      }
+
+     stage('Checkout2') {
+          steps {
+            container('occlientdockerclient') {
+          checkout scm
+        
+      }
+     }
+     }
 //stage('copy certificate') {
   //        steps {
     //        container('dind') {
@@ -89,17 +98,18 @@ pipeline {
         }
         stage('Replace Image Name') {
             steps {
-                
+                 container('occlientdockerclient') {
                 script {
                     // Replace the image name in the deployment YAML file
                     sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
                 }
+                 }
             }
             }
         
         stage('Deploy to OpenShift') {
             steps {
-                
+                 container('occlientdockerclient') {
                 // Log in to OpenShift
                 withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
                     sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
@@ -114,6 +124,7 @@ pipeline {
                 sh "oc apply -f deployment/mywebapp-service.yaml"
                 sh "oc apply -f deployment/mywebapp-route.yaml"
             
+            }
             }
         }
     }
