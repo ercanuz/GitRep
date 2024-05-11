@@ -1,22 +1,22 @@
 pipeline {
-    agent any
-//     agent {
-//        kubernetes {
-//            label 'ocp4dev' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
-//            defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
-//            yaml """
-//apiVersion: v1
-//kind: Pod
-//metadata:
-//  labels:
-//    jenkins: ocdockerclient
-//spec:
-//  containers:
-//  - name: occlientdockerclient
-//    image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
-//    command:
-//    - cat
-//    tty: true
+    
+       agent {
+          kubernetes {
+              label 'ocp4dev' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
+              defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
+              yaml """
+  apiVersion: v1
+  kind: Pod
+  metadata:
+    labels:
+      jenkins: ocdockerclient
+  spec:
+    containers:
+    - name: occlientdockerclient
+      image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
+      command:
+      - cat
+      tty: true
 //  - name: dind
 //    image: s001elk2.konsalt.info:5555/mydockerdind:1.0
 //    securityContext:
@@ -27,9 +27,9 @@ pipeline {
 //  volumes:
 //    - name: dind-storage
 //      emptyDir: {}
-//"""
-//        }
-//    }
+  """
+          }
+      }
 
     environment {
         NODEJS_VERSION = '14'
