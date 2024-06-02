@@ -37,7 +37,6 @@ spec:
           image: busybox
       imagePullSecrets:
         - name: registrypullsecret
-        - name: registrypullsecret
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       securityContext: {}
@@ -55,10 +54,7 @@ spec:
             - name: DATABASE_USER
               value: mywebapp
             - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mywebapp
-                  key: dbcredential
+              value: /etc/secret-volume/dbpassword
           ports:
             - containerPort: 3000
               protocol: TCP
@@ -75,6 +71,8 @@ spec:
           volumeMounts:
             - name: datavolume
               mountPath: /data
+            - name: secret-volume
+              mountPath: /etc/secret-volume
           terminationMessagePolicy: File
           image: 's001elk2.konsalt.info:5555/my-nodejs-app:2.0'
         - name: elastic-filebeat
@@ -93,9 +91,27 @@ spec:
           volumeMounts:
             - name: datavolume
               mountPath: /data
+        - name: fetch-secret
+          image: s001elk2.konsalt.info:5555/dssfetchsecret:2.2
+          env:
+            - name: SECRET_SERVER_URL
+              value: "https://pam.konsalt.info/SecretServer"
+            - name: SECRET_ID
+              value: "144"
+            - name: USERNAME
+              value: "admin"
+            - name: PASSWORD
+              value: "MesaKoz2023_"
+            - name: DOMAIN
+              value: "local"
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/secret-volume
       volumes:
         - name: env
           emptyDir: {}
         - name: datavolume
           persistentVolumeClaim:
             claimName: mywebdata
+        - name: secret-volume
+          emptyDir: {}
