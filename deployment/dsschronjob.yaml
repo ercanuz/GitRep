@@ -18,7 +18,7 @@ spec:
             - name: SECRET_ID
               value: "144"
             - name: USERNAME
-              value: "mywebapp"
+              value: "argocd"
             - name: PASSWORD
               value: "Kon123_5!"
             - name: DOMAIN
