@@ -14,7 +14,7 @@ spec:
             imagePullPolicy: IfNotPresent
             env:
             - name: SECRET_SERVER_URL
-              value: "https://your-secret-server-url/SecretServer"
+              value: "https://pam.konsalt.info/SecretServer"
             - name: SECRET_ID
               value: "144"
             - name: USERNAME
