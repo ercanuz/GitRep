@@ -18,9 +18,9 @@ spec:
             - name: SECRET_ID
               value: "144"
             - name: USERNAME
-              value: "argocd"
+              value: "admin"
             - name: PASSWORD
-              value: "Kon123_5!!"
+              value: "MesaKoz2023_"
             - name: DOMAIN
               value: "Local"
           restartPolicy: OnFailure
