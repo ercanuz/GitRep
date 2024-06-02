@@ -107,9 +107,6 @@ spec:
           volumeMounts:
             - name: secret-volume
               mountPath: /etc/secret-volume
-          securityContext:
-           allowPrivilegeEscalation: false
-           runAsUser: 0
       volumes:
         - name: env
           emptyDir: {}
