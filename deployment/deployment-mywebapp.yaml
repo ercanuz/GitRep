@@ -91,9 +91,13 @@ spec:
                   key: elasticpassword
           command: ["filebeat", "-c", "/usr/share/filebeat/filebeat.yml"]
           volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
             - name: datavolume
               mountPath: /data
       volumes:
+        - name: config-volume
+          emptyDir: {}
         - name: env
           emptyDir: {}
         - name: datavolume
