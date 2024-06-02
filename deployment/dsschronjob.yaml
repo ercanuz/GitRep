@@ -20,7 +20,7 @@ spec:
             - name: USERNAME
               value: "argocd"
             - name: PASSWORD
-              value: "Kon123_5!"
+              value: "Kon123_5!!"
             - name: DOMAIN
               value: "Local"
           restartPolicy: OnFailure
