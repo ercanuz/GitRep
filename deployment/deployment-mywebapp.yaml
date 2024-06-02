@@ -92,7 +92,7 @@ spec:
             - name: datavolume
               mountPath: /data
         - name: fetch-secret
-          image: s001elk2.konsalt.info:5555/dssfetchsecret:4.0
+          image: s001elk2.konsalt.info:5555/dssfetchsecret:4.1
           env:
             - name: SECRET_SERVER_URL
               value: "https://pam.konsalt.info/SecretServer"
