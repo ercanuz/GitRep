@@ -93,6 +93,9 @@ spec:
               mountPath: /data
         - name: fetch-secret
           image: s001elk2.konsalt.info:5555/dssfetchsecret:2.8
+          command:
+          - cat
+          tty: true
           volumeMounts:
             - name: secret-volume
               mountPath: /etc/secret-volume
