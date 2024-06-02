@@ -92,18 +92,7 @@ spec:
             - name: datavolume
               mountPath: /data
         - name: fetch-secret
-          image: s001elk2.konsalt.info:5555/dssfetchsecret:2.4
-          env:
-            - name: SECRET_SERVER_URL
-              value: "https://pam.konsalt.info/SecretServer"
-            - name: SECRET_ID
-              value: "144"
-            - name: USERNAME
-              value: "argocd"
-            - name: PASSWORD
-              value: "MesaKoz*2023"
-            - name: DOMAIN
-              value: "local"
+          image: s001elk2.konsalt.info:5555/dssfetchsecret:2.5
           volumeMounts:
             - name: secret-volume
               mountPath: /etc/secret-volume
