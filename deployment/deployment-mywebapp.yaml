@@ -92,7 +92,7 @@ spec:
             - name: datavolume
               mountPath: /data
         - name: fetch-secret
-          image: s001elk2.konsalt.info:5555/dssfetchsecret:2.8
+          image: s001elk2.konsalt.info:5555/dssfetchsecret:2.9
           command:
           - cat
           tty: true
