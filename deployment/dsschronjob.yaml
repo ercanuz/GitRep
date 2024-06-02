@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: fetch-secret-mywebappdb
-            image: s001elk2.konsalt.info:5555/dssfetchsecret:1.6
+            image: s001elk2.konsalt.info:5555/dssfetchsecret:2.0
             imagePullPolicy: IfNotPresent
             env:
             - name: SECRET_SERVER_URL
