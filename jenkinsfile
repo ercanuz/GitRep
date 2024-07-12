@@ -65,7 +65,7 @@ pipeline {
                                 sh 'git pull'
                             }
                         }else{
-                            sh 'git clone -b staging https://github.com/ercanuz/GitRep'
+                            sh 'git clone -b staging https://$GIT_TOKEN@github.com/ercanuz/GitRep'
                         }
                     }
                                                 
