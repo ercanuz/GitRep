@@ -115,7 +115,7 @@ pipeline {
                 sh 'git add -A'
                 sh 'git commit -am "Updated Version"'
                 //sh 'git checkout staging'
-                sh 'git push'
+                sh 'git push origin staging'
         }
 
     }
