@@ -103,8 +103,8 @@ pipeline {
             }
     stage('Commit and Push'){
         steps {
-                sh 'git config --global user.email "ercan.uzundal@knsalt.com.tr"'
-                sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep'
+                sh 'git config --global user.email "ercan.uzundal@konsalt.com.tr"'
+                sh 'git remote set-url origin https://github.com/ercanuz/GitRep'
                 sh 'git checkout staging'
                 sh 'git add -A'
                 sh 'git commit -am "Updated Version"'
