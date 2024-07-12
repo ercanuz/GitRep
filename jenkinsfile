@@ -36,20 +36,14 @@ pipeline {
         DOCKER_IMAGE_NAME = 'my-nodejs-app'
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
         OPENSHIFT_PROJECT = 'mywebapp' 
-        IMAGE_TAG = '2.0'
+        IMAGE_TAG = '${env.BUILD_ID}-${env.GIT_COMMIT}'
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
+        GIT_TOKEN = '${my_git}'
     }
 
-   stages {
-       stage('Checkout') {
-          steps {
-            
-          checkout scm
-        
-      }
-     }
+   
 //stage('copy certificate') {
   //        steps {
     //        container('dind') {
@@ -87,6 +81,24 @@ pipeline {
             
             }
         }
+        stages {
+       stage('pull/clone image') {
+          steps {
+            script {
+                if (fileExists("GitRep")) {
+                    dir("GitRep"){
+                        sh 'git pull' 
+                    }
+                }else{
+
+                    sh 'git clone -b staging https://github.com/ercanuz/GitRep.git'
+                }
+
+            }
+          //checkout scm
+        
+      }
+     }
         stage('Replace Image Name') {
             steps {
                 
@@ -96,26 +108,18 @@ pipeline {
                 }
             }
             }
-        
-        stage('Deploy to OpenShift') {
-            steps {
-                
-                // Log in to OpenShift
-                withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
-                    sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
-                }
-                // Deploy application to OpenShift
-                sh "oc project $OPENSHIFT_PROJECT"
-                sh "oc apply -f deployment/registrypullsecret.yaml"
-                sh "oc apply -f deployment/mywebdata.pvc.yaml"
-                sh "oc apply -f deployment/hashicorp-sp.yaml"
-                sh "oc apply -f deployment/mywebapp.yaml"
-                sh "oc apply -f $DEPLOYMENT_FILE"
-                sh "oc apply -f deployment/mywebapp-service.yaml"
-                sh "oc apply -f deployment/mywebapp-route.yaml"
-            
-            }
+    stage('Commit and Push'){
+        steps {
+                sh 'git config --global user.email "ercan.uzundal@knsalt.com.tr"'
+                sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep'
+                sh 'git checkout staging'
+                sh 'git add -A'
+                sh 'git commit -am "Updated Version"'
+                sh 'git push origin staging'
         }
+
+    }
+
     }
 
     post {
