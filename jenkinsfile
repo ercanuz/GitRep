@@ -5,7 +5,7 @@ pipeline {
         NODEJS_VERSION = '14'
         DOCKER_IMAGE_NAME = 'my-nodejs-app'
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
-        OPENSHIFT_PROJECT = 'mywebapp' 
+        OPENSHIFT_PROJECT = 'mywebapp'
         IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
@@ -16,13 +16,15 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                script {
-                    if (fileExists('GitRep')) {
-                        dir('GitRep') {
-                            sh 'git pull'
+                dir('GitRepoDir') {
+                    script {
+                        if (fileExists('GitRep')) {
+                            dir('GitRep') {
+                                sh 'git pull'
+                            }
+                        } else {
+                            sh 'git clone -b staging https://$GIT_TOKEN@github.com/ercanuz/GitRep'
                         }
-                    } else {
-                        sh 'git clone -b staging https://$GIT_TOKEN@github.com/ercanuz/GitRep'
                     }
                 }
             }
@@ -30,17 +32,19 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'b8a4eefc-c6dd-49ac-b1e3-ae1c1efb5dad', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
+                dir('GitRepoDir/GitRep') {
+                    withCredentials([usernamePassword(credentialsId: 'nexus_creds', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
+                    }
+                    sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
+                    sh "docker image tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
                 }
-                sh "docker build -t $DOCKER_IMAGE_NAME:$IMAGE_TAG ."
-                sh "docker image tag $DOCKER_IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME"
             }
         }
 
         stage('Push to Nexus') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'b8a4eefc-c6dd-49ac-b1e3-ae1c1efb5dad', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'nexus_creds', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD $NEXUS_REPO_URL"
                 }
                 sh "docker push $IMAGE_NAME"
@@ -49,21 +53,25 @@ pipeline {
 
         stage('Replace Image Name') {
             steps {
-                script {
-                    sh "sed -i 's#my-nodejs-app.*#my-nodejs-app:$IMAGE_TAG#' $DEPLOYMENT_FILE"
+                dir('GitRepoDir/GitRep') {
+                    script {
+                        sh "sed -i 's#my-nodejs-app.*#my-nodejs-app:$IMAGE_TAG#' $DEPLOYMENT_FILE"
+                    }
                 }
             }
         }
 
         stage('Commit and Push Changes') {
             steps {
-                script {
-                    sh 'git config --global user.email "ercan.uzundal@konsalt.com.tr"'
-                    sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git'
-                    sh 'git add -A'
-                    sh 'git commit -am "Updated Version"'
-                    sh 'git pull origin staging --rebase'
-                    sh 'git push origin staging'
+                dir('GitRepoDir/GitRep') {
+                    script {
+                        sh 'git config --global user.email "ercan.uzundal@konsalt.com.tr"'
+                        sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git'
+                        sh 'git add -A'
+                        sh 'git commit -am "Updated Version"'
+                        sh 'git pull origin staging --rebase'
+                        sh 'git push origin staging'
+                    }
                 }
             }
         }
