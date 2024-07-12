@@ -56,7 +56,7 @@ pipeline {
                 dir('GitRepoDir/GitRep') {
                     script {
                         // Update the image name in the deployment YAML file
-                        sh "sed -i 's#image: .*$#image: \"$IMAGE_NAME\"#' $DEPLOYMENT_FILE"
+                        sh 'sed -i "s#image: .*#image: \\"${IMAGE_NAME}\\"#" $DEPLOYMENT_FILE'
                     }
                 }
             }
