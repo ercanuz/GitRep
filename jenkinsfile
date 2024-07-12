@@ -36,7 +36,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'my-nodejs-app'
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
         OPENSHIFT_PROJECT = 'mywebapp' 
-        IMAGE_TAG = '2.1'
+        IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
@@ -104,7 +104,7 @@ pipeline {
     stage('Commit and Push'){
         steps {
                 sh 'git config --global user.email "ercan.uzundal@konsalt.com.tr"'
-                sh 'git remote set-url origin https://\$GIT_TOKEN@github.com/ercanuz/GitRep.git'
+                sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git'
                 sh 'git checkout staging'
                 sh 'git add -A'
                 sh 'git commit -am "Updated Version"'
