@@ -56,6 +56,12 @@ pipeline {
      //}
        stages {
 
+        stage('pull/clone image') {
+          
+          checkout scm
+    
+     }
+
         stage('Build Docker Image') {
             steps {
                 
@@ -82,23 +88,7 @@ pipeline {
             }
         }
         
-       stage('pull/clone image') {
-          steps {
-            script {
-                if (fileExists("GitRep")) {
-                    dir("GitRep"){
-                        sh 'git pull' 
-                    }
-                }else{
-
-                    sh 'git clone -b staging https://github.com/ercanuz/GitRep.git'
-                }
-
-            }
-          //checkout scm
-        
-      }
-     }
+       
         stage('Replace Image Name') {
             steps {
                 
