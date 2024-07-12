@@ -59,7 +59,15 @@ pipeline {
         stage('pull/clone image') {
           steps {
            
-                    checkout scm
+                    script{
+                        if (fileExists(gitrep)){
+                            dir('gitrep'){
+                                sh 'git pull'
+                            }
+                        }else{
+                            sh 'git clone -b staging https://github.com/ercanuz/GitRep'
+                        }
+                    }
                                                 
       }
      }
