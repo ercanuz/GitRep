@@ -34,7 +34,7 @@ spec:
             - name: env
               mountPath: /etc/config
           terminationMessagePolicy: File
-          image: busybox
+          image: "s001elk2.konsalt.info:5555/my-nodejs-app:162-8cdaa58291c5a2496dbbd0983c1fe778d7aa76fd"
       imagePullSecrets:
         - name: registrypullsecret
         - name: registrypullsecret
@@ -76,9 +76,9 @@ spec:
             - name: datavolume
               mountPath: /data
           terminationMessagePolicy: File
-          image: 's001elk2.konsalt.info:5555/my-nodejs-app:159-2e565723b40da7799b55f1e75612ed5387085372
+          image: "s001elk2.konsalt.info:5555/my-nodejs-app:162-8cdaa58291c5a2496dbbd0983c1fe778d7aa76fd"
         - name: elastic-filebeat
-          image: 's001elk2.konsalt.info:5555/filebeat:1.1'
+          image: "s001elk2.konsalt.info:5555/my-nodejs-app:162-8cdaa58291c5a2496dbbd0983c1fe778d7aa76fd"
           env:
             - name: ELASTICSEARCH_HOSTS
               value: "http://s001elk1.konsalt.info:9200"
