@@ -58,8 +58,7 @@ pipeline {
 
         stage('pull/clone image') {
           steps {
-           checkout scm
-                    script{
+                  script{
                         if (fileExists('GitRep')){
                             dir('GitRep'){
                                 sh 'git pull'
