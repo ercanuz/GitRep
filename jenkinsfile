@@ -60,8 +60,7 @@ pipeline {
           steps {
            
                     checkout scm
-                    sh 'git clone -b staging https://github.com/ercanuz/GitRep.git'
-        
+                            
       }
      }
 
