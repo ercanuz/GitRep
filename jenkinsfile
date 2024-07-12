@@ -60,7 +60,7 @@ pipeline {
           steps {
            
                     script{
-                        if (fileExists('GitRep'))){
+                        if (fileExists('GitRep')){
                             dir('GitRep'){
                                 sh 'git pull'
                             }
