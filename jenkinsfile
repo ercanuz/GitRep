@@ -60,6 +60,7 @@ pipeline {
           steps {
            
                     checkout scm
+                    sh 'git checkout -b staging'
                             
       }
      }
