@@ -57,9 +57,12 @@ pipeline {
        stages {
 
         stage('pull/clone image') {
-          
-          checkout scm
-    
+          steps {
+           
+                    checkout scm
+                    sh 'git clone -b staging https://github.com/ercanuz/GitRep.git'
+        
+      }
      }
 
         stage('Build Docker Image') {
