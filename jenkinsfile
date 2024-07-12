@@ -55,7 +55,7 @@ pipeline {
             steps {
                 dir('GitRepoDir/GitRep') {
                     script {
-                        sh "sed -i 's#my-nodejs-app.*#my-nodejs-app:$IMAGE_TAG#' $DEPLOYMENT_FILE"
+                        sh "sed -i 's#my-nodejs-app.*#my-nodejs-app:$IMAGE_TAG'#' $DEPLOYMENT_FILE"
                     }
                 }
             }
