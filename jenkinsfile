@@ -54,7 +54,7 @@ pipeline {
               //           }
      // }
      //}
-       
+       stages {
 
         stage('Build Docker Image') {
             steps {
@@ -81,7 +81,7 @@ pipeline {
             
             }
         }
-        stages {
+        
        stage('pull/clone image') {
           steps {
             script {
