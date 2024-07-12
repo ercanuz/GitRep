@@ -36,11 +36,11 @@ pipeline {
         DOCKER_IMAGE_NAME = 'my-nodejs-app'
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
         OPENSHIFT_PROJECT = 'mywebapp' 
-        IMAGE_TAG = '2.1'
+        IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
-        GIT_TOKEN = '${my_git}'
+        GIT_TOKEN = credentials('my_git')
     }
 
    
@@ -60,7 +60,7 @@ pipeline {
           steps {
            
                     checkout scm
-                    sh 'git checkout -b staging'
+                    sh 'git checkout staging'
                             
       }
      }
@@ -97,14 +97,15 @@ pipeline {
                 
                 script {
                     // Replace the image name in the deployment YAML file
-                    sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+                    //sh "sed -i 's|my-nodejs-app*|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+                    sh "sed -i 's#my-nodejs-app:.*#my-nodejs-app:$IMAGE_TAG#' $DEPLOYMENT_FILE"
                 }
             }
             }
     stage('Commit and Push'){
         steps {
-                sh 'git config --global user.email "ercan.uzundal@knsalt.com.tr"'
-                sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep'
+                sh 'git config --global user.email "ercan.uzundal@konsalt.com.tr"'
+                sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git'
                 sh 'git checkout staging'
                 sh 'git add -A'
                 sh 'git commit -am "Updated Version"'
