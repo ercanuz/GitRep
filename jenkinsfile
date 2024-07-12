@@ -114,8 +114,8 @@ pipeline {
                 sh 'git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git'
                 sh 'git add -A'
                 sh 'git commit -am "Updated Version"'
-                sh 'git checkout staging'
-                sh 'git push origin staging'
+                //sh 'git checkout staging'
+                sh 'git push'
         }
 
     }
