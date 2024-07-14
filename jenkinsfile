@@ -55,7 +55,7 @@ pipeline {
         stage('Replace Image Name') {
             steps {
                 dir('GitRepoDir/GitRep') {
-                    script {
+                    
                         script {
                     // Print file contents before the change
                     sh 'cat $DEPLOYMENT_FILE'
@@ -66,7 +66,7 @@ pipeline {
                     // Print file contents after the change
                     sh 'cat $DEPLOYMENT_FILE'
                 }
-                    }
+                    
                 }
             }
         }
