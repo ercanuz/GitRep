@@ -59,12 +59,12 @@ pipeline {
                         script {
                     // Print file contents before the change
                     sh 'cat $DEPLOYMENT_FILE'
-                    
-                    // Update the image name using sed
-                    sh 'sed -i "s#image: s001elk2.konsalt.info:5555/my-nodejs-app:[^"]*#image: \\"${IMAGE_NAME}\\"#" $DEPLOYMENT_FILE'
-                    
-                    // Print file contents after the change
-                    sh 'cat $DEPLOYMENT_FILE'
+                        
+                        // Update the image name using sed
+                        sh 'sed -i "s#image: s001elk2.konsalt.info:5555/my-nodejs-app:.*#image: s001elk2.konsalt.info:5555/my-nodejs-app:${IMAGE_NAME}#" $DEPLOYMENT_FILE'
+                        
+                        // Print file contents after the change
+                        sh 'cat $DEPLOYMENT_FILE'
                 }
                     
                 }
