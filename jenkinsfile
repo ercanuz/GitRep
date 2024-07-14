@@ -21,6 +21,7 @@ pipeline {
                         if (fileExists('GitRep')) {
                             dir('GitRep') {
                                 sh 'git pull'
+                                sh 'git checkout staging'
                             }
                         } else {
                             sh 'git clone -b staging https://$GIT_TOKEN@github.com/ercanuz/GitRep'
