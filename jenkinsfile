@@ -58,11 +58,18 @@ pipeline {
                 dir('GitRepoDir/GitRep') {
                     
                         script {
-                    // Print file contents before the change
+                    // Print the original YAML file for debugging
+                    sh "echo 'Original YAML file:'"
+                    sh "cat deployment/deployment-mywebapp.yaml"
+                    
+                    // Perform the replacement
                     sh """
-                    sed -i 's#image: ${IMAGE_REPO}:.*#image: ${IMAGE_REPO}:${IMAGE_TAG}#' deployment/deployment-mywebapp.yaml
-                    cat deployment/deployment-mywebapp.yaml
+                    sed -i 's#image: \\"${IMAGE_REPO}:.*\\"#image: \\"${IMAGE_REPO}:${IMAGE_TAG}\\"#' deployment/deployment-mywebapp.yaml
                     """
+
+                    // Print the modified YAML file for debugging
+                    sh "echo 'Modified YAML file:'"
+                    sh "cat deployment/deployment-mywebapp.yaml"
                 }
                     
                 }
