@@ -9,6 +9,7 @@ pipeline {
         IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
+        IMAGE_REPO = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME"
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
         GIT_TOKEN = credentials('my_git')
     }
@@ -58,13 +59,10 @@ pipeline {
                     
                         script {
                     // Print file contents before the change
-                    sh 'cat $DEPLOYMENT_FILE'
-                        
-                        // Update the image name using sed
-                        sh 'sed -i "s#image: s001elk2.konsalt.info:5555/my-nodejs-app:.*#image: s001elk2.konsalt.info:5555/my-nodejs-app:${IMAGE_NAME}#" $DEPLOYMENT_FILE'
-                        
-                        // Print file contents after the change
-                        sh 'cat $DEPLOYMENT_FILE'
+                    sh """
+                    sed -i 's#image: ${IMAGE_REPO}:.*#image: ${IMAGE_REPO}:${IMAGE_TAG}#' deployment/deployment-mywebapp.yaml
+                    cat deployment/deployment-mywebapp.yaml
+                    """
                 }
                     
                 }
