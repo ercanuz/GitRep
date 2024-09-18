@@ -1,9 +1,0 @@
-apiVersion: v1
-data:
-  clientID: QmlSWkFVSlhxREhScW5aZkM2bXpRTUNjR1VtTHdYQzQ=
-  clientSecret: cnZodzJlVXdBUDc2SEF6QkRoNXowTk1UQURFOE5mRG5zZ3pTQUNObHhzX0VZcU1XcnV4LXVMZDZ6VWo0RWdySg==
-kind: Secret
-metadata:
-  name: hashicorp-sp
-  namespace: mywebapp
-type: Opaque

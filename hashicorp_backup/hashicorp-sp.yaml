@@ -1,0 +1,29 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "hashicorp-sp",
+    "namespace": "mywebapp",
+    "creationTimestamp": null,
+    "annotations": {
+      "sealedsecrets.bitnami.com/cluster-wide": "true"
+    }
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "hashicorp-sp",
+        "namespace": "mywebapp",
+        "creationTimestamp": null,
+        "annotations": {
+          "sealedsecrets.bitnami.com/cluster-wide": "true"
+        }
+      },
+      "type": "Opaque"
+    },
+    "encryptedData": {
+      "clientID": "AgC+8o0wc5FcSLgqXGs23D6X/ib0Qyyni2i/aTYiuSHRW/8JxEFpM4Qr9KZkU1L9WR/yiTamZ8gDaVP8yDW6kZn6lVY/wpPnoE0ETT89G3bowJGAcGagjko93sRJ2Bjb78zyJOzl3egGSnpV/OF4UQUb1PUHISPIgfVLaXw9AoxTLqYKpoOCK5OIR5sYCO+tTypV2YADLXyCTJLc0apmZLJRJywXy8c3xl8OiaFdLOvZPQxvghtjdj3ZsEX9RvPFIeI4Uf4HwBK4eULMCk+2PmlywbbS7Zo1y/gu8J3/hN1PJ6yTSh60S1wfnpdfbXJJzSkJSAL4fNg8gtz4tWrpFR63brY/806A2di0JKG7U8ztqiDh9hbAeOdgFGmUTP457QlvcSLayq7EGi9CjiXLoAibox3fCt4Q4BQqOdj9krCuNunIS6tr0M5xNC8GJ+D8QLbu+Kk6/he74Y+TauymYpswP223uJKNUIQnUPH0mxBkQdIfskXO7SeaBf0tUbGBkcMW+H9clkMUNIE8g1EsjEK01Xavu4+mJ5hUMX95J+XYRTgGXndtmTBIOU3EOOfIYLC6CZf63klIz0kBkML2BdDVyPV0ONcMtZqScKwpxSThiUO6oNwf0GAsuv2hJWw/nXaTb9nsRIhaX8FwhRh11xFQUbmgJor1OtKB6Z1QdSKYEmqqhNQcd5/sXxZJAhFbSbHmM8T/bR9iOM/5oN9ffx5SWKGahzA7oK+1DD5DX/LHvw==",
+      "clientSecret": "AgDL2lZuAK/U5hpprZt+/kPel1rYL++Edu9js63OcUqOBp8cMD4ZYi0HjrtWJpLeFB7ilNf4n5FJ728+7MuQ67y/ou70cHFY4zAA4i2qC+A39/Ke3ja4ImcXWhRtA9arWmp0HsFDBuQ6d8FJL7ShulhLs5Dwo6Rf8nA3ifV7En/SQeMzoVznQYhfdcciJa99BVTSliVOfXRGshxG3aWagqSpddVJaLtw1xWVvrPsWErSxJ1Np8dmN82bNZpWoSKxns9v/D0+Oc0HSbnLdiN+328Wm8z7IkNIisDbVW/mP4Lr+m28w8iC0EbyCAfqX9UNsIlD5nW8g+6KexlETI+SknuBAv2ZigwgKIWwaAKeJeJ9C6bHvtTOO8QJbO5X+RUoTyibK2P7qlnVeI8mRLgUUmLKbMIqT3SChiDhXkCfsHMIv7QVbXL+MhXUIf48KjDPHBGI1wS2zjZ6UL1kbU1x1x5RG4Zyxge4EepaqngpYXF/6R1VDgpso/xLzFC+g/Cgdze+oc7PcPsxNXHN+Tvw1PRxYPXNTiatQmfxDeWreGsXbyeW3AumrjbJdbyC6JKdtZcCUQwxjNs+ofeje9jOK3kAur1iTWH13YrkLd/2h640xIa5oEHVgpGs765O7foyOlDNTKYW8NjaNr8o+qkevtWMmPtne0LjGVGY9BHWv9uiZ3VR4jY9s3L3TiFwx8eHyzQSPOYqyMkWDHqlyi/G7YeI2EX3Xvev4ayzd92ev4l1Pc4sv5N+vKdbUaHgG2hseVnqzi4uSPpjSdPjkuZzJ5o8"
+    }
+  }
+}
