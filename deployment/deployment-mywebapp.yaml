@@ -75,6 +75,8 @@ spec:
           volumeMounts:
             - name: datavolume
               mountPath: /data
+            - name: datavolume2
+              mountPath: /var/tmp
           terminationMessagePolicy: File
           image: "s001elk2.konsalt.info:5555/my-nodejs-app"
         - name: elastic-filebeat
@@ -92,10 +94,13 @@ spec:
           command: ["filebeat", "-c", "/usr/share/filebeat/filebeat.yml"]
           volumeMounts:
             - name: datavolume
-              mountPath: /data
+              mountPath: /data            
       volumes:
         - name: env
           emptyDir: {}
         - name: datavolume
           persistentVolumeClaim:
             claimName: mywebdata
+        - name: datavolume2
+          persistentVolumeClaim:
+            claimName: nfs-pvc
