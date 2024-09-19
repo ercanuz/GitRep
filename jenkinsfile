@@ -3,7 +3,7 @@ pipeline {
      agent {
         kubernetes {
             label 'konsno' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
-           defaultContainer 'ocpagent' // Replace 'your-container-template-name' with the name of your container template
+            defaultContainer 'ocpagent' // Replace 'your-container-template-name' with the name of your container template
             yaml """
 apiVersion: v1
 kind: Pod
