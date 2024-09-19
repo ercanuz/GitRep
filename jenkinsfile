@@ -14,6 +14,8 @@ spec:
   containers:
   - name: occlientdockerclient
     image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
+    securityContext:
+      privileged: true
     command:
     - cat
     tty: true
