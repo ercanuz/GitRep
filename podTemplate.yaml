@@ -26,7 +26,6 @@ spec:
         mountPath: /var/lib/docker
   - name: jnlp
     image: 'jenkins/inbound-agent:latest'
-    args: ['$(JENKINS_SECRET)', '$(JENKINS_NAME)']
     volumeMounts:
       - name: workspace-volume
         mountPath: /home/jenkins/agent
