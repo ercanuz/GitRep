@@ -2,37 +2,10 @@ pipeline {
    // agent any
      agent {
         kubernetes {
-            label 'konsno' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
-            //defaultContainer 'ocpagent' // Replace 'your-container-template-name' with the name of your container template
-            yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    jenkins: slave
-spec:
-  containers:
-  - name: occlientdockerclient
-    image: 's001elk2.konsalt.info:5555/jenkins-git-oc-agent-rhel8:1.1'
-    securityContext:
-      privileged: true
-    command:
-    - cat
-    tty: true
-  - name: dind
-    image: s001elk2.konsalt.info:5555/mydockerdind:1.1
-    securityContext:
-      privileged: true
-    volumeMounts:
-      - name: dind-storage
-        mountPath: /var/lib/docker
-  volumes:
-    - name: dind-storage
-      emptyDir: {}
-"""
+           //label 'konsno'  // The Kubernetes agent label
+            yamlFile 'podTemplate.yaml'  // Reference to the external YAML file
         }
     }
-
 
     environment {
         NODEJS_VERSION = '14'
