@@ -8,6 +8,8 @@ pipeline {
 apiVersion: v1
 kind: Pod
 metadata:
+  labels:
+    jenkins: ocdockerclient
 spec:
   containers:
   - name: occlientdockerclient
