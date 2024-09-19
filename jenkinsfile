@@ -2,7 +2,7 @@ pipeline {
    // agent any
      agent {
     kubernetes {
-        //label 'konsno' // Use the correct label
+        label 'jenkins-slave' // Use the correct label
         yaml """
 apiVersion: v1
 kind: Pod
