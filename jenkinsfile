@@ -2,8 +2,8 @@ pipeline {
    // agent any
      agent {
         kubernetes {
-            label 'ocp4dev' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
-            defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
+            label 'konsno' // Replace 'your-kubernetes-label' with the label assigned to your Kubernetes agent
+           // defaultContainer 'jenkins' // Replace 'your-container-template-name' with the name of your container template
             yaml """
 apiVersion: v1
 kind: Pod
