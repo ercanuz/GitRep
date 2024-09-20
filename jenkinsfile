@@ -3,7 +3,7 @@ pipeline {
      agent {
         kubernetes {
            label 'jenkins-slave'  // The Kubernetes agent label
-            yamlFile 'podTemplate.yaml'  // Reference to the external YAML file
+          //  yamlFile 'podTemplate.yaml'  // Reference to the external YAML file
         }
     }
 
