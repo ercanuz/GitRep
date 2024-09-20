@@ -12,26 +12,10 @@ spec:
     command:
     - cat
     tty: true
-    volumeMounts:
-      - name: workspace-volume
-        mountPath: /home/jenkins/agent
   - name: dind
     image: s001elk2.konsalt.info:5555/mydockerdind:1.1
     securityContext:
       privileged: true
     volumeMounts:
-      - name: workspace-volume
-        mountPath: /home/jenkins/agent
       - name: dind-storage
         mountPath: /var/lib/docker
-  - name: jnlp
-    image: 'jenkins/inbound-agent:latest'
-    volumeMounts:
-      - name: workspace-volume
-        mountPath: /home/jenkins/agent
-  volumes:
-    - name: dind-storage
-      emptyDir: {}
-    - name: workspace-volume
-      persistentVolumeClaim:
-        claimName: jenkinsnfspvc
