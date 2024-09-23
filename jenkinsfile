@@ -2,6 +2,7 @@ pipeline {
 agent {
         kubernetes {
             cloud 'konsno'
+            defaultContainer 'ocpagent'
             yaml """
             apiVersion: v1
             kind: Pod
