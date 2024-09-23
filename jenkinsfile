@@ -1,7 +1,7 @@
 pipeline {
-  agent {
+agent {
         kubernetes {
-               cloud 'konsno'
+            cloud 'konsno'
             yaml """
             apiVersion: v1
             kind: Pod
@@ -10,6 +10,12 @@ pipeline {
                 jenkins: agent
             spec:
               containers:
+              - name: jnlp
+                image: jenkins/inbound-agent:4.3-4
+                args: ['\${computer.jnlpmac}', '\${computer.name}']
+                volumeMounts:
+                - name: workspace-volume
+                  mountPath: /home/jenkins/agent
               - name: dind
                 image: s001elk2.konsalt.info:5555/mydockerdind:1.1
                 command:
@@ -25,11 +31,17 @@ pipeline {
                 command:
                 - cat
                 tty: true
+                volumeMounts:
+                - name: workspace-volume
+                  mountPath: /home/jenkins/agent
               volumes:
               - name: dind-storage
                 emptyDir: {}
-           """
-            }
+              - name: workspace-volume
+                persistentVolumeClaim:
+                  claimName: jenkinsnfspvc
+            """
+        }
     }
 
     environment {
