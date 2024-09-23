@@ -12,8 +12,6 @@ agent {
               containers:
               - name: dind
                 image: s001elk2.konsalt.info:5555/mydockerdind:1.1
-                command:
-                - cat
                 tty: true
                 securityContext:
                   privileged: true
