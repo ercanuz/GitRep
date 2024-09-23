@@ -13,6 +13,9 @@ agent {
               - name: jnlp
                 image: jenkins/inbound-agent:4.3-4
                 args: ['\${computer.jnlpmac}', '\${computer.name}']
+                env:
+                - name: JENKINS_WEB_SOCKET
+                  value: "true"
                 volumeMounts:
                 - name: workspace-volume
                   mountPath: /home/jenkins/agent
