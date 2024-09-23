@@ -11,6 +11,12 @@ agent {
                 jenkins: agent
             spec:
               containers:
+              - name: jnlp
+                image: jenkins/inbound-agent:4.3-4
+                args: ['\${computer.jnlpmac}', '\${computer.name}']
+                volumeMounts:
+                - name: workspace-volume
+                  mountPath: /home/jenkins/agent
               - name: dind
                 image: s001elk2.konsalt.info:5555/mydockerdind:1.1
                 tty: true
