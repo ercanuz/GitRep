@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
       <label for="phonenumber">Phone Number:</label>
       <input type="text" id="phonenumber" name="phonenumber"><br><br>
       <input type="submit" value="Submit">
+      <input type="text" id="test" name="test"><br><br>
     </form>
   `);
 });
