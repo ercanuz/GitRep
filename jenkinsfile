@@ -92,7 +92,18 @@ stage('copy certificate') {
                 container('occlientdockerclient') {
                 script {
                     // Replace the image name in the deployment YAML file
-                    sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+                    //sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+                    sh "sed -i 's|my-nodejs-app:[^ ]*|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
+
+                    // Git configuration (if not already configured)
+                sh """
+                git config --global user.email 'ercan.uzundal@konsalt.com.tr'
+                git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git
+                sh 'git add $DEPLOYMENT_FILE'
+                sh 'git commit -m "Update image tag to $IMAGE_TAG in $DEPLOYMENT_FILE"'
+                git push origin master
+                """
+
                 }
             }
             }
