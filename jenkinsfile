@@ -102,8 +102,7 @@ stage('copy certificate') {
                 sh "git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git"
                 sh "git add /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml"
                 sh "git commit -m 'Update image tag to $IMAGE_TAG in /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml'"
-                def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
-                sh "git push origin $branch"
+                sh "git push origin HEAD:refs/heads/main"
             
 
                 }
