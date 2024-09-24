@@ -102,7 +102,7 @@ stage('copy certificate') {
                 git config --global user.email 'ercan.uzundal@konsalt.com.tr'
                 git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git
                 git add /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml
-                sh 'git commit -m "Update image tag to $IMAGE_TAG in $DEPLOYMENT_FILE"'
+                sh 'git commit -m "Update image tag to $IMAGE_TAG in /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml"'
                 git push origin master
                 """
 
