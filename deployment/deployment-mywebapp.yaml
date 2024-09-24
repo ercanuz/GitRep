@@ -78,7 +78,7 @@ spec:
             - name: datavolume2
               mountPath: /var/tmp
           terminationMessagePolicy: File
-          image: "my-nodejs-app:304-0f7f408f08f06b8d20591bb026de95ca52d9fee2"
+          image: "my-nodejs-app:315-fb5e11dcd5d72e85098b7b3210f3cdf1cb6068e5
         - name: elastic-filebeat
           image: 's001elk2.konsalt.info:5555/filebeat:1.1'
           env:
