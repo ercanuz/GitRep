@@ -98,28 +98,28 @@ stage('copy certificate') {
             }
         }
         
-        stage('Deploy to OpenShift') {
-            steps {
-                container('occlientdockerclient') {
-                // Log in to OpenShift
-                withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
-                    sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
-                }
-                // Deploy application to OpenShift
-                sh "oc project $OPENSHIFT_PROJECT"
-                sh "oc apply -f deployment/registrypullsecret.yaml"
-                sh "oc apply -f deployment/mywebdata.pvc.yaml"
-                sh "oc apply -f deployment/hashicorp-sp.yaml"
-                sh "oc apply -f deployment/nfs-pv.yaml"
-                sh "oc apply -f deployment/nfs-pvc.yaml"
-                sh "oc apply -f deployment/create_mywebapp_secret_via_hcp.yaml"
-                sh "oc apply -f $DEPLOYMENT_FILE"
-                sh "oc apply -f deployment/mywebapp-service.yaml"
-                sh "oc apply -f deployment/mywebapp-route.yaml"
-            
-                }
-            }
-        }
+        //stage('Deploy to OpenShift') {
+        //    steps {
+        //        container('occlientdockerclient') {
+        //        // Log in to OpenShift
+        //        withCredentials([usernamePassword(credentialsId: '25c57432-cd22-4ad7-abcf-5d69a610a005', usernameVariable: 'OPENSHIFT_USERNAME', passwordVariable: 'OPENSHIFT_PASSWORD')]) {
+        //            sh "oc login -u $OPENSHIFT_USERNAME -p $OPENSHIFT_PASSWORD $OPENSHIFT_API --insecure-skip-tls-verify"
+        //        }
+        //        // Deploy application to OpenShift
+        //        sh "oc project $OPENSHIFT_PROJECT"
+        //        sh "oc apply -f deployment/registrypullsecret.yaml"
+        //        sh "oc apply -f deployment/mywebdata.pvc.yaml"
+        //        sh "oc apply -f deployment/hashicorp-sp.yaml"
+        //        sh "oc apply -f deployment/nfs-pv.yaml"
+        //        sh "oc apply -f deployment/nfs-pvc.yaml"
+        //        sh "oc apply -f deployment/create_mywebapp_secret_via_hcp.yaml"
+        //        sh "oc apply -f $DEPLOYMENT_FILE"
+        //        sh "oc apply -f deployment/mywebapp-service.yaml"
+        //        sh "oc apply -f deployment/mywebapp-route.yaml"
+        //    
+        //        }
+        //    }
+        //}
     }
 
     post {
