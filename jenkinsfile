@@ -98,6 +98,7 @@ stage('copy certificate') {
 
                     // Git configuration (if not already configured)
                 sh """
+                git config --global --add safe.directory /home/jenkins/agent/workspace/mywebapp
                 git config --global user.email 'ercan.uzundal@konsalt.com.tr'
                 git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git
                 sh 'git add $DEPLOYMENT_FILE'
