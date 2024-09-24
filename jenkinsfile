@@ -94,7 +94,7 @@ stage('copy certificate') {
                 script {
                     // Replace the image name in the deployment YAML file
                     //sh "sed -i 's|my-nodejs-app|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
-                    sh "sed -i 's|my-nodejs-app:[^ ]*|my-nodejs-app:$IMAGE_TAG\"|g' $DEPLOYMENT_FILE"
+                    sh "sed -i 's|my-nodejs-app:[^ ]*|my-nodejs-app:$IMAGE_TAG|g' $DEPLOYMENT_FILE"
                  
                     // Git configuration (if not already configured)
                 sh "git config --global --add safe.directory /home/jenkins/agent/workspace/mywebapp"
