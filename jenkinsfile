@@ -40,6 +40,7 @@ agent {
         OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
+        GIT_TOKEN = credentials('my_git')
     }
 
    stages {
