@@ -49,7 +49,7 @@ agent {
                 container('occlientdockerclient') {
                     script {
                         // Checkout the staging branch explicitly
-                        sh "git checkout staging"
+                        //sh "git checkout staging"
                         checkout scm
                     }
                 }
