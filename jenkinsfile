@@ -122,7 +122,7 @@ stage('copy certificate') {
                         -H "Accept: application/vnd.github+json" \
                         -H "X-GitHub-Api-Version: 2022-11-28" \
                         -d '{ "commit_message": "Merge staging to master", "head": "staging", "base": "master" }' \
-                        https://api.github.com/repos/ercanuz/GitRep/merges
+                        'https://api.github.com/repos/ercanuz/GitRep/pulls'
                         """
                     }
                 }
