@@ -4,7 +4,7 @@ metadata:
   name: mywebapp
   namespace: mywebapp
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mywebapp
@@ -78,7 +78,7 @@ spec:
             - name: datavolume2
               mountPath: /var/tmp
           terminationMessagePolicy: File
-          image: s001elk2.konsalt.info:5555/my-nodejs-app:326-9e9502a5b7d88560f36e2dea62be349bb13ddd23
+          image: s001elk2.konsalt.info:5555/my-nodejs-app:328-f7a76f89ced8b6c64368db5558d5e6731a1a3e19
         - name: elastic-filebeat
           image: 's001elk2.konsalt.info:5555/filebeat:1.1'
           env:

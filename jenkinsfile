@@ -45,12 +45,16 @@ agent {
 
    stages {
        stage('Checkout') {
-          steps {
-            container('occlientdockerclient') {
-          checkout scm
+            steps {
+                container('occlientdockerclient') {
+                    script {
+                        // Checkout the staging branch explicitly
+                        //sh "git checkout staging"
+                        checkout scm
+                    }
+                }
             }
-      }
-     }
+        }
 stage('copy certificate') {
         steps {
         container('dind') {
@@ -102,14 +106,26 @@ stage('copy certificate') {
                 sh "git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git"
                 sh "git add /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml"
                 sh "git commit -m 'Update image tag to $IMAGE_TAG in /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml'"
-                sh "git push origin HEAD:refs/heads/master"
+                sh "git push origin HEAD:refs/heads/staging"
             
 
                 }
             }
             }
         }
-        
+        stage('Create Merge Request') {
+            steps {
+                container('occlientdockerclient') {
+                    script {
+                        sh """
+                        curl -X POST -H "Authorization: token $GIT_TOKEN" \
+                        -d '{ "title": "Merge staging to master", "head": "staging", "base": "master" }' \
+                        https://api.github.com/repos/ercanuz/GitRep/pulls
+                        """
+                    }
+                }
+            }
+        }
         //stage('Deploy to OpenShift') {
         //    steps {
         //        container('occlientdockerclient') {
