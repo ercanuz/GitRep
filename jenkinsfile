@@ -1,7 +1,7 @@
 pipeline {
 agent {
         kubernetes {
-            cloud 'konsno'
+            cloud 'ocpkobil'
             defaultContainer 'ocpagent'
             yaml """
             apiVersion: v1
@@ -37,7 +37,7 @@ agent {
         NEXUS_REPO_URL = 's001elk2.konsalt.info:5555'
         OPENSHIFT_PROJECT = 'mywebapp' 
         IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
-        OPENSHIFT_API = 'api.konsno.konsalt.info:6443'
+        OPENSHIFT_API = 'api.ocpkobil.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
         GIT_TOKEN = credentials('my_git')
