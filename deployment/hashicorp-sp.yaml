@@ -1,0 +1,9 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: hashicorp-sp
+  namespace: mywebapp
+data:
+  clientID: MFR2QmRUUmZZYnJmV0Q2ZzlQTU41eE4xVFdxY1dQZ3k=
+  clientSecret: WFhjaHJGX3FfN0JodmZWbHlVQjZDdW5ydWtwYjJ6VmlIZ3pzUXNzbjdlSzlrMmMzRmpqUXY2UF9jRGZ2b19mMg==
+type: Opaque
