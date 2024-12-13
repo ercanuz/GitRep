@@ -4,6 +4,6 @@ metadata:
   name: hashicorp-sp
   namespace: mywebapp
 data:
-  clientID: MFR2QmRUUmZZYnJmV0Q2ZzlQTU41eE4xVFdxY1dQZ3kK
-  clientSecret: WFhjaHJGX3FfN0JodmZWbHlVQjZDdW5ydWtwYjJ6VmlIZ3pzUXNzbjdlSzlrMmMzRmpqUXY2UF9jRGZ2b19mMgo=
+  clientID: QUkzMWJIZFdXbTNHU01lWldLb0xYRjlsQmo5ajNpVVo=
+  clientSecret: MVpzU01GdXVFX1pVVFY3V3NGSnFFRmk2bGJsSFV6WDdDMmFVbTJTU1l0a0s3dlRkaS1xa2d5eHhQbENJV2x2OA==
 type: Opaque
