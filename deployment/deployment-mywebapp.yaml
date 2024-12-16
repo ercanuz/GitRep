@@ -98,4 +98,4 @@ spec:
           emptyDir: {}
         - name: datavolume
           persistentVolumeClaim:
-            claimName: mywebdata
+            claimName: mywebdata-1
