@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mywebdata
+  name: mywebdata-1
   namespace: mywebapp
 spec:
   accessModes:
