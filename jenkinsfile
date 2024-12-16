@@ -24,6 +24,8 @@ agent {
                 command:
                 - cat
                 tty: true
+                securityContext:
+                  privileged: true
               volumes:
               - name: dind-storage
                 emptyDir: {}
