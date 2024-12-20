@@ -103,4 +103,4 @@ spec:
             claimName: mywebdata-2
         - name: nfs-data
           persistentVolumeClaim:
-            claimName: nfs-pvc
+            claimName: nfspvc
