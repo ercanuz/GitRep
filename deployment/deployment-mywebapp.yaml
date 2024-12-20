@@ -75,8 +75,8 @@ spec:
           volumeMounts:
             - name: datavolume
               mountPath: /data
-            - name: nfs-data
-              mountPath: /tmp
+            #- name: nfs-data
+             # mountPath: /tmp
           terminationMessagePolicy: File
           image: s001elk2.konsalt.info:5555/my-nodejs-app:377-4c7a324090f6f471b85d5873c441276734c3aa91
         - name: elastic-filebeat
@@ -101,6 +101,6 @@ spec:
         - name: datavolume
           persistentVolumeClaim:
             claimName: mywebdata-2
-        - name: nfs-data
-          persistentVolumeClaim:
-            claimName: nfspvc
+        #- name: nfs-data
+         # persistentVolumeClaim:
+          #  claimName: nfspvc
