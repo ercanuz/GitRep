@@ -8,4 +8,4 @@ spec:
   resources:
     requests:
       storage: 15Gi
- storageClassName: thin-csi
+  storageClassName: thin-csi
