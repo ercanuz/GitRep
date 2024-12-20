@@ -11,3 +11,4 @@ spec:
     path: /data01/nfsdata/nfspv
     server: 192.168.1.195
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: thin-csi
