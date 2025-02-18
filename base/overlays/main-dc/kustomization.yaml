@@ -4,7 +4,7 @@ metadata:
    name: kustomize-webapp-deploy
 namespace: mywebapp   
 resources:
-  - ../../base/deployment-mywebapp.yaml
+  - ../../deployment-mywebapp.yaml
 patches:
   - target:
       version: v1
