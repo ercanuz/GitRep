@@ -4,7 +4,7 @@ metadata:
   name: kustomize-deployment-replica-production
 namespace: mywebapp
 resources:
-  - ../../base/deployment-mywebapp.yaml
+  - ../../base/
 patches:
   - target:
       kind: Deployment
