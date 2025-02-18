@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -9,6 +10,7 @@ const port = 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // PostgreSQL configuration
 const pool = new Pool({
@@ -46,7 +48,14 @@ app.get('/', async (req, res) => {
     writeLog('ERROR', 'Error fetching contacts from database');
   }
 
-  let contactList = contacts.map(contact => `<li>${contact.name} ${contact.surname} - ${contact.title} - ${contact.phonenumber}</li>`).join('');
+  let contactList = contacts.map(contact => `
+    <tr>
+      <td>${contact.name}</td>
+      <td>${contact.surname}</td>
+      <td>${contact.title}</td>
+      <td>${contact.phonenumber}</td>
+    </tr>
+  `).join('');
   
   res.send(`
     <!DOCTYPE html>
@@ -75,7 +84,7 @@ app.get('/', async (req, res) => {
           width: 150px;
           margin-bottom: 20px;
         }
-        h2 {
+        h2, h3 {
           margin-bottom: 20px;
         }
         form {
@@ -106,17 +115,24 @@ app.get('/', async (req, res) => {
         input[type="submit"]:hover {
           background-color: #218838;
         }
-        ul {
-          list-style: none;
-          padding: 0;
-          text-align: left;
+        table {
+          width: 100%;
+          border-collapse: collapse;
           margin-top: 20px;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
         }
       </style>
     </head>
     <body>
       <div class="container">
-        <img src="https://via.placeholder.com/150" alt="Company Logo">
+        <img src="/images/logo-1024x288.png" alt="">
         <h2>Contact Form</h2>
         <form action="/submit" method="post">
           <label for="name">Name:</label>
@@ -134,7 +150,15 @@ app.get('/', async (req, res) => {
           <input type="submit" value="Submit">
         </form>
         <h3>Contact List</h3>
-        <ul>${contactList}</ul>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Title</th>
+            <th>Phone Number</th>
+          </tr>
+          ${contactList}
+        </table>
       </div>
     </body>
     </html>
@@ -161,5 +185,5 @@ app.post('/submit', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`It is started. Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
