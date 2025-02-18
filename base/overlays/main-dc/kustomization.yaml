@@ -1,12 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: kustomize-deployment-replica-production
-namespace: mywebapp
 resources:
-  - ../../base/
-patches:
+- ../../base/deployment-mywebapp.yaml
+patchesJson6902:
   - target:
+      version: v1
+      group: apps
       kind: Deployment
       name: mywebapp
     patch: |-
