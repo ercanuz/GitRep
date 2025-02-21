@@ -2,5 +2,6 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: mywebapp
+  namespace: mywebapp
 spec:
   replicas: 5
