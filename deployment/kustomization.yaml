@@ -10,4 +10,3 @@ resources:
   - hashicorp-sp.yaml
   - hcpvaultsecretsapps-patch-role.yaml
   - hcpvaultsecretsapps-patch-rolebinding.yaml
-  - mywebapp-db-password.yaml
