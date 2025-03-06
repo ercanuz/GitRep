@@ -1,7 +1,7 @@
 ﻿kind: Deployment
 apiVersion: apps/v1
 metadata:
-  annotation:
+  annotations:
     argocd.argoproj.io/sync-wave: '1'
   name: mywebapp
   namespace: mywebapp
