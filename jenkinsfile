@@ -40,7 +40,7 @@ agent {
         OPENSHIFT_PROJECT = 'mywebapp' 
         IMAGE_TAG = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         OPENSHIFT_API = 'api.ocpkobil.konsalt.info:6443'
-        DEPLOYMENT_FILE = 'base/deployment-mywebapp.yaml'
+        DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
         GIT_TOKEN = credentials('my_git')
         GITREP_PULL_REQ_TOKEN = credentials('GitRep_Pull_Req_Token')
@@ -107,8 +107,8 @@ stage('copy certificate') {
                 sh "git config --global --add safe.directory /home/jenkins/agent/workspace/mywebapp"
                 sh "git config --global user.email 'ercan.uzundal@konsalt.com.tr'"
                 sh "git remote set-url origin https://$GIT_TOKEN@github.com/ercanuz/GitRep.git"
-                sh "git add /home/jenkins/agent/workspace/mywebapp/base/deployment-mywebapp.yaml"
-                sh "git commit -m 'Update image tag to $IMAGE_TAG in /home/jenkins/agent/workspace/mywebapp/base/deployment-mywebapp.yaml'"
+                sh "git add /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml"
+                sh "git commit -m 'Update image tag to $IMAGE_TAG in /home/jenkins/agent/workspace/mywebapp/deployment/deployment-mywebapp.yaml'"
                 sh "git push origin HEAD:refs/heads/staging"
             
 
