@@ -57,8 +57,8 @@ spec:
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mywebapp
-                  key: dbcredential
+                  name: mywebapp-db-password
+                  key: dbpassword
           ports:
             - containerPort: 3000
               protocol: TCP
