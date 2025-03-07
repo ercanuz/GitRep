@@ -25,7 +25,7 @@ const pool = new Pool({
 function writeLog(severity, message) {
   const logFilePath = '/data/app.log';
   const timestamp = new Date().toISOString().slice(0, 19);
-  const logMessage = [${timestamp}] [${severity}] ${message}\n;
+  const logMessage = `[${timestamp}] [${severity}] ${message}\n`;
 
   fs.appendFile(logFilePath, logMessage, (err) => {
     if (err) {
@@ -48,16 +48,16 @@ app.get('/', async (req, res) => {
     writeLog('ERROR', 'Error fetching contacts from database');
   }
 
-  let contactList = contacts.map(contact => 
+  let contactList = contacts.map(contact => `
     <tr>
       <td>${contact.name}</td>
       <td>${contact.surname}</td>
       <td>${contact.title}</td>
       <td>${contact.phonenumber}</td>
     </tr>
-  ).join('');
-  
-  res.send(
+  `).join('');
+
+  res.send(`
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -131,6 +131,8 @@ app.get('/', async (req, res) => {
       </style>
     </head>
     <body>
+
+
       <div class="container">
         <img src="/images/logo-1024x288.png" alt="">
         <h2>Contact Form</h2>
@@ -162,7 +164,7 @@ app.get('/', async (req, res) => {
       </div>
     </body>
     </html>
-  );
+  `);
 });
 
 app.post('/submit', async (req, res) => {
@@ -185,5 +187,5 @@ app.post('/submit', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(Server running on port ${port});
+  console.log(`Server running on port ${port}`);
 });
