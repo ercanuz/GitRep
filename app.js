@@ -1,9 +1,3 @@
-Paylaş
-
-User
-PLUS
-PLUS
-Şunu dedin:
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
