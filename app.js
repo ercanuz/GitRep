@@ -1,3 +1,9 @@
+Paylaş
+
+User
+PLUS
+PLUS
+Şunu dedin:
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
@@ -25,7 +31,7 @@ const pool = new Pool({
 function writeLog(severity, message) {
   const logFilePath = '/data/app.log';
   const timestamp = new Date().toISOString().slice(0, 19);
-  const logMessage = `[${timestamp}] [${severity}] ${message}\n`;
+  const logMessage = [${timestamp}] [${severity}] ${message}\n;
 
   fs.appendFile(logFilePath, logMessage, (err) => {
     if (err) {
@@ -48,26 +54,89 @@ app.get('/', async (req, res) => {
     writeLog('ERROR', 'Error fetching contacts from database');
   }
 
-  let contactList = contacts.map(contact => `
+  let contactList = contacts.map(contact => 
     <tr>
       <td>${contact.name}</td>
       <td>${contact.surname}</td>
       <td>${contact.title}</td>
       <td>${contact.phonenumber}</td>
     </tr>
-  `).join('');
+  ).join('');
   
-  res.send(`
+  res.send(
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Contact Form</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+        .container {
+          width: 50%;
+          margin: 50px auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        img {
+          width: 150px;
+          margin-bottom: 20px;
+        }
+        h2, h3 {
+          margin-bottom: 20px;
+        }
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        label {
+          font-weight: bold;
+          display: block;
+          text-align: left;
+          width: 100%;
+        }
+        input {
+          width: 80%;
+          padding: 10px;
+          margin: 5px 0 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        input[type="submit"] {
+          background-color: #28a745;
+          color: white;
+          border: none;
+          cursor: pointer;
+          padding: 10px 15px;
+        }
+        input[type="submit"]:hover {
+          background-color: #218838;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+      </style>
     </head>
     <body>
-      <h2>Database Password (Debug Purpose Only)</h2>
-      <p>${process.env.DATABASE_PASSWORD}</p>
       <div class="container">
         <img src="/images/logo-1024x288.png" alt="">
         <h2>Contact Form</h2>
@@ -99,7 +168,7 @@ app.get('/', async (req, res) => {
       </div>
     </body>
     </html>
-  `);
+  );
 });
 
 app.post('/submit', async (req, res) => {
@@ -122,5 +191,5 @@ app.post('/submit', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(Server running on port ${port});
 });
