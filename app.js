@@ -47,7 +47,7 @@ app.get('/', async (req, res) => {
     console.error('Error fetching contacts', err);
     writeLog('ERROR', 'Error fetching contacts from database');
   } finally {
-    if (client) client.release();
+    if (client) client.release(); // Başarılı veya başarısız her durumda bağlantıyı kapat
   }
 
   let contactList = contacts.map(contact => `
@@ -66,71 +66,6 @@ app.get('/', async (req, res) => {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Contact Form</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          margin: 0;
-          padding: 0;
-          background-color: #f4f4f4;
-        }
-        .container {
-          width: 50%;
-          margin: 50px auto;
-          background: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        img {
-          width: 150px;
-          margin-bottom: 20px;
-        }
-        h2, h3 {
-          margin-bottom: 20px;
-        }
-        form {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        label {
-          font-weight: bold;
-          display: block;
-          text-align: left;
-          width: 100%;
-        }
-        input {
-          width: 80%;
-          padding: 10px;
-          margin: 5px 0 15px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        }
-        input[type="submit"] {
-          background-color: #28a745;
-          color: white;
-          border: none;
-          cursor: pointer;
-          padding: 10px 15px;
-        }
-        input[type="submit"]:hover {
-          background-color: #218838;
-        }
-        table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 20px;
-        }
-        th, td {
-          border: 1px solid #ddd;
-          padding: 8px;
-          text-align: left;
-        }
-        th {
-          background-color: #f2f2f2;
-        }
-      </style>
     </head>
     <body>
       <div class="container">
@@ -178,7 +113,7 @@ app.post('/submit', async (req, res) => {
     writeLog('ERROR', 'An error occurred while processing the request.');
     res.redirect('/?error=true');
   } finally {
-    if (client) client.release();
+    if (client) client.release(); // Başarılı veya başarısız her durumda bağlantıyı kapat
   }
 });
 
