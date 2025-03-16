@@ -42,8 +42,8 @@ agent {
         OPENSHIFT_API = 'api.ocpkobil.konsalt.info:6443'
         DEPLOYMENT_FILE = 'deployment/deployment-mywebapp.yaml'
         IMAGE_NAME = "$NEXUS_REPO_URL/$DOCKER_IMAGE_NAME:$IMAGE_TAG"
-        GIT_TOKEN = credentials('my_git')
-        GITREP_PULL_REQ_TOKEN = credentials('GitRep_Pull_Req_Token')
+        GIT_TOKEN = credentials('Github_Auth_Codet')
+        GITREP_PULL_REQ_TOKEN = credentials('Github_Auth_Code')
     }
 
    stages {
