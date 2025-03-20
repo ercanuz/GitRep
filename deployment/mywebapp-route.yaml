@@ -4,7 +4,7 @@ metadata:
   name: mywebapp-route
   namespace: mywebapp
 spec:
-  host: mywebapp.apps.ocpkobil.konsalt.info
+  host: mywebapp.konsalt.info
   to:
     kind: Service
     name: mywebapp-service
