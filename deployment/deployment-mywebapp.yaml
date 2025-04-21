@@ -78,7 +78,7 @@ spec:
             - name: datavolume
               mountPath: /data
           terminationMessagePolicy: File
-          image: s001elk2.konsalt.info:5555/my-nodejs-app:402-a5b9dadb7d312bfab0d3c7d72caa26b6b975a142
+          image: s001elk2.konsalt.info:5555/my-nodejs-app:403-72366f9f12e03529f3856adb45d8eaa57f8e1531
         - name: elastic-filebeat
           image: 's001elk2.konsalt.info:5555/filebeat:1.1'
           env:
